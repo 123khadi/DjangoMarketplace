@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="text-align:center; padding:100px 20px; background:#f8fafc; min-height:80vh; color:#111;">
+  <div style="font-size:60px;">✅</div>
+  <h1 style="color:#15803d;">Order Placed!</h1>
+  <h2 style="margin-top:15px;">{{ product.name }} - ${{ product.price }}</h2>
+  <p style="margin-top:15px; color:#555;">Thank you {{ request.user.username }} 🏠, your order is received.</p>
+  <a href="/product-cart/" style="display:inline-block; margin-top:25px; background:#2563eb; color:white; padding:12px 25px; border-radius:10px; text-decoration:none;">Go to Dashboard</a>
+</div>
+{% endblock %}

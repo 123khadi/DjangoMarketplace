@@ -3,598 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Django Services Marketplace</title>
-
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f7fb;
-            color: #1f2937;
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        button,
-        input,
-        textarea,
-        select {
-            font: inherit;
-        }
-
-        /* ================= HEADER ================= */
-
-        header {
-            background: #111827;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
-        }
-
-        .navbar {
-            max-width: 1200px;
-            margin: auto;
-            padding: 18px 25px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #38bdf8;
-        }
-
-        .logo span {
-            color: white;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #e5e7eb;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #38bdf8;
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-            padding: 11px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .btn-primary {
-            background: #0ea5e9;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #0284c7;
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            border: 1px solid #38bdf8;
-            color: #38bdf8;
-            background: transparent;
-        }
-
-        .btn-outline:hover {
-            background: #38bdf8;
-            color: #111827;
-        }
-
-        /* ================= HERO ================= */
-
-        .hero {
-            background: linear-gradient(135deg, #0f172a, #172554);
-            color: white;
-            padding: 100px 25px;
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .hero h1 {
-            font-size: clamp(38px, 6vw, 65px);
-            line-height: 1.1;
-            margin-bottom: 25px;
-        }
-
-        .hero h1 span {
-            color: #38bdf8;
-        }
-
-        .hero p {
-            font-size: 19px;
-            color: #cbd5e1;
-            margin-bottom: 30px;
-            max-width: 650px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .hero-card {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
-            padding: 35px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .hero-card h3 {
-            color: #38bdf8;
-            margin-bottom: 20px;
-        }
-
-        .hero-card ul {
-            list-style: none;
-        }
-
-        .hero-card li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .hero-card li:last-child {
-            border-bottom: none;
-        }
-
-        /* ================= GENERAL ================= */
-
-        section {
-            padding: 80px 25px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 38px;
-            margin-bottom: 10px;
-        }
-
-        .section-title p {
-            color: #6b7280;
-        }
-
-        /* ================= SERVICES ================= */
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .service-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.06);
-            border: 1px solid #e5e7eb;
-            transition: 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-
-        .service-icon {
-            font-size: 42px;
-            margin-bottom: 15px;
-        }
-
-        .service-card h3 {
-            margin-bottom: 12px;
-        }
-
-        .service-card p {
-            color: #6b7280;
-            margin-bottom: 18px;
-        }
-
-        .service-card ul {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        .service-card li {
-            margin: 7px 0;
-        }
-
-        .service-card li::before {
-            content: "✓ ";
-            color: #0ea5e9;
-            font-weight: bold;
-        }
-
-        /* ================= PRICING ================= */
-
-        .pricing {
-            background: #eef6ff;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .price-card {
-            background: white;
-            padding: 35px;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid #dbeafe;
-        }
-
-        .price-card.featured {
-            border: 3px solid #0ea5e9;
-            transform: scale(1.03);
-        }
-
-        .price-card h3 {
-            font-size: 23px;
-        }
-
-        .price {
-            font-size: 40px;
-            font-weight: bold;
-            color: #0ea5e9;
-            margin: 15px 0;
-        }
-
-        .price-card ul {
-            list-style: none;
-            margin: 25px 0;
-            text-align: left;
-        }
-
-        .price-card li {
-            padding: 8px 0;
-        }
-
-        .price-card li::before {
-            content: "✓ ";
-            color: #16a34a;
-            font-weight: bold;
-        }
-
-        /* ================= PORTFOLIO ================= */
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .portfolio-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-        }
-
-        .portfolio-image {
-            height: 190px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0ea5e9, #1e3a8a);
-            color: white;
-            font-size: 55px;
-        }
-
-        .portfolio-content {
-            padding: 25px;
-        }
-
-        .portfolio-content p {
-            color: #6b7280;
-            margin: 10px 0;
-        }
-
-        .tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-
-        /* ================= WHY US ================= */
-
-        .why {
-            background: #111827;
-            color: white;
-        }
-
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-            text-align: center;
-        }
-
-        .why-card {
-            padding: 25px;
-        }
-
-        .why-card .icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
-
-        .why-card p {
-            color: #cbd5e1;
-            margin-top: 8px;
-        }
-
-        /* ================= FAQ ================= */
-
-        .faq-container {
-            max-width: 850px;
-            margin: auto;
-        }
-
-        details {
-            background: white;
-            margin-bottom: 12px;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #e5e7eb;
-        }
-
-        summary {
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        details p {
-            margin-top: 12px;
-            color: #6b7280;
-        }
-
-        /* ================= CONTACT ================= */
-
-        .contact {
-            background: #eef6ff;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 0.8fr 1.2fr;
-            gap: 40px;
-        }
-
-        .contact-info {
-            background: #111827;
-            color: white;
-            padding: 35px;
-            border-radius: 15px;
-        }
-
-        .contact-info h3 {
-            color: #38bdf8;
-            margin-bottom: 20px;
-        }
-
-        .contact-info p {
-            color: #cbd5e1;
-            margin-bottom: 15px;
-        }
-
-        .contact-form {
-            background: white;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 7px;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #d1d5db;
-            border-radius: 7px;
-            outline: none;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            border-color: #0ea5e9;
-        }
-
-        textarea {
-            min-height: 130px;
-            resize: vertical;
-        }
-
-        /* ================= FOOTER ================= */
-
-        footer {
-            background: #020617;
-            color: white;
-            padding: 50px 25px 25px;
-        }
-
-        .footer-grid {
-            max-width: 1200px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-        }
-
-        footer h3 {
-            margin-bottom: 15px;
-            color: #38bdf8;
-        }
-
-        footer p,
-        footer li {
-            color: #94a3b8;
-        }
-
-        footer ul {
-            list-style: none;
-        }
-
-        footer li {
-            margin: 8px 0;
-        }
-
-        .copyright {
-            max-width: 1200px;
-            margin: 35px auto 0;
-            padding-top: 20px;
-            border-top: 1px solid #1e293b;
-            text-align: center;
-            color: #64748b;
-        }
-
-        /* ================= RESPONSIVE ================= */
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: Arial, Helvetica, sans-serif; background: #f5f7fb; color: #1f2937; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        button, input, textarea, select { font: inherit; }
+        header { background: #111827; color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15); }
+        .navbar { max-width: 1200px; margin: auto; padding: 18px 25px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 24px; font-weight: bold; color: #38bdf8; }
+        .logo span { color: white; }
+        .nav-links { display: flex; gap: 25px; list-style: none; }
+        .nav-links a { color: #e5e7eb; transition: 0.3s; }
+        .nav-links a:hover { color: #38bdf8; }
+        .nav-buttons { display: flex; gap: 10px; align-items: center; }
+        .btn { display: inline-block; border: none; cursor: pointer; padding: 11px 20px; border-radius: 8px; font-weight: bold; transition: 0.3s; }
+        .btn-primary { background: #0ea5e9; color: white; }
+        .btn-primary:hover { background: #0284c7; transform: translateY(-2px); }
+        .btn-outline { border: 1px solid #38bdf8; color: #38bdf8; background: transparent; }
+        .btn-outline:hover { background: #38bdf8; color: #111827; }
+        .hero { background: linear-gradient(135deg, #0f172a, #172554); color: white; padding: 100px 25px; }
+        .hero-container { max-width: 1200px; margin: auto; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
+        .hero h1 { font-size: clamp(38px, 6vw, 65px); line-height: 1.1; margin-bottom: 25px; }
+        .hero h1 span { color: #38bdf8; }
+        .hero p { font-size: 19px; color: #cbd5e1; margin-bottom: 30px; max-width: 650px; }
+        .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+        .hero-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 35px; border-radius: 20px; backdrop-filter: blur(10px); }
+        .hero-card h3 { color: #38bdf8; margin-bottom: 20px; }
+        .hero-card ul { list-style: none; }
+        .hero-card li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .hero-card li:last-child { border-bottom: none; }
+        section { padding: 80px 25px; }
+        .container { max-width: 1200px; margin: auto; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 38px; margin-bottom: 10px; }
+        .section-title p { color: #6b7280; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .service-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); border: 1px solid #e5e7eb; transition: 0.3s; }
+        .service-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .service-icon { font-size: 42px; margin-bottom: 15px; }
+        .service-card h3 { margin-bottom: 12px; }
+        .service-card p { color: #6b7280; margin-bottom: 18px; }
+        .service-card ul { list-style: none; margin-bottom: 20px; }
+        .service-card li { margin: 7px 0; }
+        .service-card li::before { content: "✓ "; color: #0ea5e9; font-weight: bold; }
+        .pricing { background: #eef6ff; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .price-card { background: white; padding: 35px; border-radius: 15px; text-align: center; border: 1px solid #dbeafe; }
+        .price-card.featured { border: 3px solid #0ea5e9; transform: scale(1.03); }
+        .price-card h3 { font-size: 23px; }
+        .price { font-size: 40px; font-weight: bold; color: #0ea5e9; margin: 15px 0; }
+        .price-card ul { list-style: none; margin: 25px 0; text-align: left; }
+        .price-card li { padding: 8px 0; }
+        .price-card li::before { content: "✓ "; color: #16a34a; font-weight: bold; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .portfolio-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); }
+        .portfolio-image { height: 190px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0ea5e9, #1e3a8a); color: white; font-size: 55px; }
+        .portfolio-content { padding: 25px; }
+        .portfolio-content p { color: #6b7280; margin: 10px 0; }
+        .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .tag { background: #e0f2fe; color: #0369a1; padding: 5px 10px; border-radius: 20px; font-size: 12px; }
+        .why { background: #111827; color: white; }
+        .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; text-align: center; }
+        .why-card { padding: 25px; }
+        .why-card .icon { font-size: 40px; margin-bottom: 15px; }
+        .why-card p { color: #cbd5e1; margin-top: 8px; }
+        .faq-container { max-width: 850px; margin: auto; }
+        details { background: white; margin-bottom: 12px; padding: 20px; border-radius: 10px; border: 1px solid #e5e7eb; }
+        summary { cursor: pointer; font-weight: bold; }
+        details p { margin-top: 12px; color: #6b7280; }
+        .contact { background: #eef6ff; }
+        .contact-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 40px; }
+        .contact-info { background: #111827; color: white; padding: 35px; border-radius: 15px; }
+        .contact-info h3 { color: #38bdf8; margin-bottom: 20px; }
+        .contact-info p { color: #cbd5e1; margin-bottom: 15px; }
+        .contact-form { background: white; padding: 35px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 7px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 13px; border: 1px solid #d1d5db; border-radius: 7px; outline: none; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: #0ea5e9; }
+        textarea { min-height: 130px; resize: vertical; }
+        footer { background: #020617; color: white; padding: 50px 25px 25px; }
+        .footer-grid { max-width: 1200px; margin: auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+        footer h3 { margin-bottom: 15px; color: #38bdf8; }
+        footer p, footer li { color: #94a3b8; }
+        footer ul { list-style: none; }
+       footer p, footer li { color: #94a3b8; }
+        footer ul { list-style: none; }
+        footer li { margin: 8px 0; }
+        .copyright { max-width: 1200px; margin: 35px auto 0; padding-top: 20px; border-top: 1px solid #1e293b; text-align: center; color: #64748b; }
         @media (max-width: 900px) {
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero-container,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .services-grid,
-            .pricing-grid,
-            .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .why-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .nav-links { display: none; }
+            .hero-container, .contact-grid { grid-template-columns: 1fr; }
+            .services-grid, .pricing-grid, .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media (max-width: 600px) {
-
-            section {
-                padding: 60px 18px;
-            }
-
-            .hero {
-                padding: 70px 18px;
-            }
-
-            .services-grid,
-            .pricing-grid,
-            .portfolio-grid,
-            .why-grid,
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .price-card.featured {
-                transform: none;
-            }
-
-            .nav-buttons .btn-outline {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 42px;
-            }
+            section { padding: 60px 18px; }
+            .hero { padding: 70px 18px; }
+            .services-grid, .pricing-grid, .portfolio-grid, .why-grid, .footer-grid { grid-template-columns: 1fr; }
+            .price-card.featured { transform: none; }
+            .nav-buttons .btn-outline { display: none; }
+            .hero h1 { font-size: 42px; }
+            
         }
+        .portfolio-image {
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0ea5e9, #1e3a8a);
+    color: white;
+    font-size: 55px;
+    padding-bottom: 15px; /* ye line add karo */
+}
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+.portfolio-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.portfolio-image {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    background: linear-gradient(135deg, #0ea5e9, #2563eb);
+}
+@media (max-width: 900px) {
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .portfolio-grid { grid-template-columns: 1fr; }
+}
+/* --- PROJECT FEATURES FIX --- */
+.portfolio-grid, .features-grid, .project-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 25px !important;
+    padding: 20px !important;
+}
+
+.portfolio-card {
+    background: #ffffff !important;
+    border-radius: 15px !important;
+    overflow: hidden !important;
+    border: 1px solid #eee !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    min-height: 320px !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08) !important;
+}
+
+.portfolio-image, .feature-icon {
+    background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
+    height: 180px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 50px !important;
+}
+
+.portfolio-content {
+    padding: 20px !important;
+    text-align: center !important;
+    flex-grow: 1 !important;
+}
+
+.portfolio-content h3 {
+    font-size: 18px !important;
+    font-weight: bold !important;
+    margin-bottom: 10px !important;
+}
+
+.portfolio-content p {
+    font-size: 14px !important;
+    color: #666 !important;
+    line-height: 1.5 !important;
+}
+
+@media (max-width: 900px) {
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 600px) {
+    .portfolio-grid { grid-template-columns: 1fr !important; }
+}
     </style>
 </head>
-
 <body>
 
-<!-- ================= HEADER ================= -->
-
 <header>
-
     <nav class="navbar">
-
-        <a href="#" class="logo">
-            Django<span>Market</span>
-        </a>
-
+        <a href="#" class="logo">Django<span>Market</span></a>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#services">Services</a></li>
@@ -603,54 +213,31 @@
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-
         <div class="nav-buttons">
-            <a href="#contact" class="btn btn-outline">Login</a>
-            <a href="#contact" class="btn btn-primary">Get Started</a>
+            {% if user.is_authenticated %}
+              <span style="color:#38bdf8; margin-right:8px; font-weight:bold;">Welcome, {{ user.username }} 🏡</span>
+              <a href="/product-cart/" class="btn btn-primary">Shop Now</a>
+              <a href="/logout/" class="btn btn-outline">Logout</a>
+            {% else %}
+              <a href="/login/" class="btn btn-outline">Login</a>
+              <a href="/get-started/" class="btn btn-primary">Get Started</a>
+            {% endif %}
         </div>
-
     </nav>
-
 </header>
 
-
-<!-- ================= HERO ================= -->
-
 <section class="hero" id="home">
-
     <div class="hero-container">
-
         <div>
-
-            <h1>
-                Build Your
-                <span>Dream Website</span>
-                With Django
-            </h1>
-
-            <p>
-                Professional Django development services for businesses,
-                schools, hospitals, startups and individuals worldwide.
-            </p>
-
+            <h1>Build Your <span>Dream Website</span> With Django</h1>
+            <p>Professional Django development services for businesses, schools, hospitals, startups and individuals worldwide.</p>
             <div class="hero-buttons">
-
-                <a href="#services" class="btn btn-primary">
-                    Explore Services
-                </a>
-
-                <a href="#contact" class="btn btn-outline">
-                    Start Your Project
-                </a>
-
+                <a href="#services" class="btn btn-primary">Explore Services</a>
+                <a href="#contact" class="btn btn-outline">Start Your Project</a>
             </div>
-
         </div>
-
         <div class="hero-card">
-
             <h3>🚀 What I Build</h3>
-
             <ul>
                 <li>🏥 Hospital Management Systems</li>
                 <li>🎓 Learning Management Systems</li>
@@ -659,668 +246,134 @@
                 <li>📊 Admin Dashboards</li>
                 <li>⚙️ Custom Django Applications</li>
             </ul>
-
         </div>
-
     </div>
-
 </section>
-
-
-<!-- ================= SERVICES ================= -->
-
 <section id="services">
-
     <div class="container">
-
-        <div class="section-title">
-            <h2>My Services</h2>
-            <p>Professional web development services tailored to your needs.</p>
-        </div>
-
+            <div class="section-title"><h2>My Services</h2><p>Professional web development services tailored to your needs.</p></div>
         <div class="services-grid">
-
-            <div class="service-card">
-
-                <div class="service-icon">🏥</div>
-
-                <h3>Hospital Management System</h3>
-
-                <p>
-                    Complete web-based hospital management solutions.
-                </p>
-
-                <ul>
-                    <li>Patient Management</li>
-                    <li>Doctor Management</li>
-                    <li>Appointments</li>
-                    <li>Medical Records</li>
-                    <li>Admin Dashboard</li>
-                </ul>
-
-                <a href="#contact" class="btn btn-primary">
-                    Request Project
-                </a>
-
-            </div>
-
-
-            <div class="service-card">
-
-                <div class="service-icon">🎓</div>
-
-                <h3>Learning Management System</h3>
-
-                <p>
-                    Modern LMS platforms for schools, teachers and businesses.
-                </p>
-
-                <ul>
-                    <li>Student Accounts</li>
-                    <li>Teacher Accounts</li>
-                    <li>Courses & Lessons</li>
-                    <li>Assignments</li>
-                    <li>Progress Tracking</li>
-                </ul>
-
-                <a href="#contact" class="btn btn-primary">
-                    Request Project
-                </a>
-
-            </div>
-
-
-            <div class="service-card">
-
-                <div class="service-icon">🌐</div>
-
-                <h3>Portfolio Website</h3>
-
-                <p>
-                    Professional websites to showcase your work and skills.
-                </p>
-
-                <ul>
-                    <li>Modern Design</li>
-                    <li>Responsive Layout</li>
-                    <li>Projects Section</li>
-                    <li>Contact Form</li>
-                    <li>Admin Management</li>
-                </ul>
-
-                <a href="#contact" class="btn btn-primary">
-                    Request Project
-                </a>
-
-            </div>
-
+            <div class="service-card"><div class="service-icon">🏥</div><h3>Hospital Management System</h3><p>Complete web-based hospital management solutions.</p><ul><li>Patient Management</li><li>Doctor Management</li><li>Appointments</li><li>Medical Records</li><li>Admin Dashboard</li></ul><a href="#contact" class="btn btn-primary">Request Project</a></div>
+            <div class="service-card"><div class="service-icon">🎓</div><h3>Learning Management System</h3><p>Modern LMS platforms for schools, teachers and businesses.</p><ul><li>Student Accounts</li><li>Teacher Accounts</li><li>Courses & Lessons</li><li>Assignments</li><li>Progress Tracking</li></ul><a href="#contact" class="btn btn-primary">Request Project</a></div>
+            <div class="service-card"><div class="service-icon">🌐</div><h3>Portfolio Website</h3><p>Professional websites to showcase your work and skills.</p><ul><li>Modern Design</li><li>Responsive Layout</li><li>Projects Section</li><li>Contact Form</li><li>Admin Management</li></ul><a href="#contact" class="btn btn-primary">Request Project</a></div>
         </div>
-
     </div>
-
 </section>
-
-
-<!-- ================= PRICING ================= -->
 
 <section class="pricing" id="pricing">
-
     <div class="container">
-
-        <div class="section-title">
-
-            <h2>Simple Pricing</h2>
-
-            <p>
-                Choose a package or contact me for a custom quotation.
-            </p>
-
-        </div>
-
+        <div class="section-title"><h2>Simple Pricing</h2><p>Choose a package or contact me for a custom quotation.</p></div>
         <div class="pricing-grid">
-
-            <div class="price-card">
-
-                <h3>Starter</h3>
-
-                <div class="price">$99</div>
-
-                <p>For simple websites</p>
-
-                <ul>
-                    <li>5 Pages</li>
-                    <li>Responsive Design</li>
-                    <li>HTML & CSS</li>
-                    <li>Contact Form</li>
-                    <li>Basic Support</li>
-                </ul>
-
-                <a href="#contact" class="btn btn-primary">
-                    Order Now
-                </a>
-
-            </div>
-
-
-            <div class="price-card featured">
-
-                <h3>Professional</h3>
-
-                <div class="price">$299</div>
-
-                <p>For Django applications</p>
-
-                <ul>
-                    <li>Django Backend</li>
-                    <li>Database Integration</li>
-                    <li>User Authentication</li>
-                    <li>Admin Dashboard</li>
-                    <li>Responsive Design</li>
-                </ul>
-
-                <a href="#contact" class="btn btn-primary">
-                    Order Now
-                </a>
-
-            </div>
-
-
-            <div class="price-card">
-
-                <h3>Enterprise</h3>
-
-                <div class="price">$599+</div>
-
-                <p>For complex systems</p>
-
-                <ul>
-                    <li>Custom Django System</li>
-                    <li>Advanced Dashboard</li>
-                    <li>Multiple User Roles</li>
-                    <li>API Integration</li>
-                    <li>Deployment Support</li>
-                </ul>
-
-                <a href="#contact" class="btn btn-primary">
-                    Get Quote
-                </a>
-
-            </div>
-
+            <div class="price-card"><h3>Starter</h3><div class="price">$99</div><p>For simple websites</p><ul><li>5 Pages</li><li>Responsive Design</li><li>HTML & CSS</li><li>Contact Form</li><li>Basic Support</li></ul><a href="#contact" class="btn btn-primary">Order Now</a></div>
+            <div class="price-card featured"><h3>Professional</h3><div class="price">$299</div><p>For Django applications</p><ul><li>Django Backend</li><li>Database Integration</li><li>User Authentication</li><li>Admin Dashboard</li><li>Responsive Design</li></ul><a href="#contact" class="btn btn-primary">Order Now</a></div>
+            <div class="price-card"><h3>Enterprise</h3><div class="price">$599+</div><p>For complex systems</p><ul><li>Custom Django System</li><li>Advanced Dashboard</li><li>Multiple User Roles</li><li>API Integration</li><li>Deployment Support</li></ul><a href="#contact" class="btn btn-primary">Get Quote</a></div>
         </div>
-
     </div>
-
 </section>
 
-
-<!-- ================= PORTFOLIO ================= -->
-
-<section id="portfolio">
-
-    <div class="container">
-
-        <div class="section-title">
-
-            <h2>Featured Projects</h2>
-
-            <p>
-                Some examples of applications you can showcase here.
-            </p>
-
+<section class="project" id="Features">
+    <div class="section-title"><h2>Project Features</h2>
+    <div class="portfolio-grid">
+    <div class="portfolio-card">
+        <div class="portfolio-image">🏥</div>
+        <div class="portfolio-content">
+            <h3>Hospital Management</h3>
+            <p>Django based hospital administration system</p>
         </div>
-
-        <div class="portfolio-grid">
-
-            <div class="portfolio-card">
-
-                <div class="portfolio-image">
-                    🏥
-                </div>
-
-                <div class="portfolio-content">
-
-                    <h3>Hospital Management</h3>
-
-                    <p>
-                        Django-based hospital administration system.
-                    </p>
-
-                    <div class="tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Django</span>
-                        <span class="tag">MySQL</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="portfolio-card">
-
-                <div class="portfolio-image">
-                    🎓
-                </div>
-
-                <div class="portfolio-content">
-
-                    <h3>Online Learning Platform</h3>
-
-                    <p>
-                        Complete LMS for students and teachers.
-                    </p>
-
-                    <div class="tags">
-                        <span class="tag">Django</span>
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="portfolio-card">
-
-                <div class="portfolio-image">
-                    💼
-                </div>
-
-                <div class="portfolio-content">
-
-                    <h3>Developer Portfolio</h3>
-
-                    <p>
-                        Responsive portfolio website for professionals.
-                    </p>
-
-                    <div class="tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JavaScript</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
 
+    <div class="portfolio-card">
+        <div class="portfolio-image">🎓</div>
+        <div class="portfolio-content">
+            <h3>Online Learning Platform</h3>
+            <p>Complete LMS for students and teachers</p>
+        </div>
+    </div>
+
+    <div class="portfolio-card">
+        <div class="portfolio-image">🛒</div>
+        <div class="portfolio-content">
+            <h3>E-Commerce Store</h3>
+            <p>Full featured online shop with payments</p>
+        </div>
+    </div>
+
+    <div class="portfolio-card">
+        <div class="portfolio-image">📁</div>
+        <div class="portfolio-content">
+            <h3>Portfolio CMS</h3>
+            <p>Dynamic portfolio management system</p>
+        </div>
+    </div>
+</div>
 </section>
-
-
-<!-- ================= WHY US ================= -->
 
 <section class="why">
-
     <div class="container">
-
-        <div class="section-title">
-
-            <h2>Why Work With Me?</h2>
-
-            <p style="color:#cbd5e1;">
-                Professional development focused on your goals.
-            </p>
-
-        </div>
-
+        <div class="section-title"><h2>Why Work With Me?</h2><p style="color:#cbd5e1;">Professional development focused on your goals.</p></div>
         <div class="why-grid">
-
-            <div class="why-card">
-                <div class="icon">🐍</div>
-                <h3>Python Expert</h3>
-                <p>Strong Python and Django development.</p>
-            </div>
-
-            <div class="why-card">
-                <div class="icon">📱</div>
-                <h3>Responsive</h3>
-                <p>Works across desktop, tablet and mobile.</p>
-            </div>
-
-            <div class="why-card">
-                <div class="icon">⚡</div>
-                <h3>Fast Delivery</h3>
-                <p>Efficient development and communication.</p>
-            </div>
-
-            <div class="why-card">
-                <div class="icon">🌍</div>
-                <h3>Worldwide</h3>
-                <p>Available for clients internationally.</p>
-            </div>
-
+            <div class="why-card"><div class="icon">🐍</div><h3>Python Expert</h3><p>Strong Python and Django development.</p></div>
+            <div class="why-card"><div class="icon">📱</div><h3>Responsive</h3><p>Works across desktop, tablet and mobile.</p></div>
+            <div class="why-card"><div class="icon">⚡</div><h3>Fast Delivery</h3><p>Efficient development and communication.</p></div>
+            <div class="why-card"><div class="icon">🌍</div><h3>Worldwide</h3><p>Available for clients internationally.</p></div>
         </div>
-
     </div>
-
 </section>
-
-
-<!-- ================= FAQ ================= -->
 
 <section id="faq">
-
     <div class="container">
-
-        <div class="section-title">
-
-            <h2>Frequently Asked Questions</h2>
-
-            <p>
-                Answers to common questions about my services.
-            </p>
-
-        </div>
-
+        <div class="section-title"><h2>Frequently Asked Questions</h2><p>Answers to common questions about my services.</p></div>
         <div class="faq-container">
-
-            <details>
-                <summary>What types of Django websites do you develop?</summary>
-                <p>
-                    I develop Hospital Management Systems, LMS platforms,
-                    portfolio websites, business websites, dashboards and
-                    custom Django applications.
-                </p>
-            </details>
-
-            <details>
-                <summary>Can you build a custom Hospital Management System?</summary>
-                <p>
-                    Yes. Features can include patients, doctors, appointments,
-                    departments, medical records and administrative dashboards.
-                </p>
-            </details>
-
-            <details>
-                <summary>Can you develop an LMS from scratch?</summary>
-                <p>
-                    Yes. I can develop courses, students, teachers, lessons,
-                    assignments, authentication and progress management.
-                </p>
-            </details>
-
-            <details>
-                <summary>Will my website be responsive?</summary>
-                <p>
-                    Yes. Websites are designed to work on desktops, tablets
-                    and mobile devices.
-                </p>
-            </details>
-
-            <details>
-                <summary>Can you fix an existing Django project?</summary>
-                <p>
-                    Yes. I can troubleshoot Django errors, fix bugs,
-                    improve existing features and add new functionality.
-                </p>
-            </details>
-
-            <details>
-                <summary>Can you deploy my Django application?</summary>
-                <p>
-                    Deployment assistance can be provided according to your
-                    hosting and server requirements.
-                </p>
-            </details>
-
+            <details><summary>What types of Django websites do you develop?</summary><p>I develop Hospital Management Systems, LMS platforms, portfolio websites, business websites, dashboards and custom Django applications.</p></details>
+            <details><summary>Can you build a custom Hospital Management System?</summary><p>Yes. Features can include patients, doctors, appointments, departments, medical records and administrative dashboards.</p></details>
+            <details><summary>Can you develop an LMS from scratch?</summary><p>Yes. I can develop courses, students, teachers, lessons, assignments, authentication and progress management.</p></details>
+            <details><summary>Will my website be responsive?</summary><p>Yes. Websites are designed to work on desktops, tablets and mobile devices.</p></details>
+            <details><summary>Can you fix an existing Django project?</summary><p>Yes. I can troubleshoot Django errors, fix bugs, improve existing features and add new functionality.</p></details>
+            <details><summary>Can you deploy my Django application?</summary><p>Deployment assistance can be provided according to your hosting and server requirements.</p></details>
         </div>
-
     </div>
-
 </section>
-
-
-<!-- ================= CONTACT ================= -->
 
 <section class="contact" id="contact">
-
     <div class="container">
-
-        <div class="section-title">
-
-            <h2>Start Your Project</h2>
-
-            <p>
-                Tell me about your project and I will get back to you.
-            </p>
-
-        </div>
-
+        <div class="section-title"><h2>Start Your Project</h2><p>Tell me about your project and I will get back to you.</p></div>
         <div class="contact-grid">
-
-            <div class="contact-info">
-
-                <h3>Let's Build Something Great 🚀</h3>
-
-                <p>
-                    Have an idea for a website or Django application?
-                    Send your requirements and let's discuss your project.
-                </p>
-
-                <p>📧 Email: your@email.com</p>
-
-                <p>💬 WhatsApp: +00 000 0000000</p>
-
-                <p>🌍 Serving clients worldwide</p>
-
-            </div>
-
-
+            <div class="contact-info"><h3>Let's Build Something Great 🚀</h3><p>Have an idea for a website or Django application? Send your requirements and let's discuss your project.</p><p>📧 Email: khadijjayaq7779@outlook.com</p><p>💬 WhatsApp: +92 332 5710034</p><p>🌍 Serving clients worldwide</p></div>
             <form class="contact-form" id="projectForm">
-
-                <div class="form-group">
-
-                    <label for="name">
-                        Your Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="name"
-                        placeholder="Enter your name"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="email">
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Enter your email"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="service">
-                        Select Service
-                    </label>
-
-                    <select id="service" required>
-
-                        <option value="">
-                            Choose a service
-                        </option>
-
-                        <option>
-                            Hospital Management System
-                        </option>
-
-                        <option>
-                            Learning Management System
-                        </option>
-
-                        <option>
-                            Portfolio Website
-                        </option>
-
-                        <option>
-                            Custom Django Application
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="budget">
-                        Project Budget
-                    </label>
-
-                    <select id="budget">
-
-                        <option value="">
-                            Select budget
-                        </option>
-
-                        <option>$100 - $300</option>
-                        <option>$300 - $600</option>
-                        <option>$600 - $1,000</option>
-                        <option>$1,000+</option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="message">
-                        Project Requirements
-                    </label>
-
-                    <textarea
-                        id="message"
-                        placeholder="Describe your project..."
-                        required
-                    ></textarea>
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="btn btn-primary"
-                >
-                    Send Project Request
-                </button>
-
+                <div class="form-group"><label>Your Name</label><input type="text" id="name" placeholder="Enter your name" required></div>
+                <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="Enter your email" required></div>
+                <div class="form-group"><label>Select Service</label><select id="service" required><option value="">Choose a service</option><option>Hospital Management System</option><option>Learning Management System</option><option>Portfolio Website</option><option>Custom Django Application</option></select></div>
+                <div class="form-group"><label>Project Budget</label><select id="budget"><option value="">Select budget</option><option>$100 - $300</option><option>$300 - $600</option><option>$600 - $1,000</option><option>$1,000+</option></select></div>
+                <div class="form-group"><label>Project Requirements</label><textarea id="message" placeholder="Describe your project..." required></textarea></div>
+                <button type="submit" class="btn btn-primary">Send Project Request</button>
             </form>
-
         </div>
-
     </div>
-
 </section>
 
-
-<!-- ================= FOOTER ================= -->
-
 <footer>
-
     <div class="footer-grid">
-
-        <div>
-
-            <h3>DjangoMarket</h3>
-
-            <p>
-                Professional Django and Python development services
-                for clients worldwide.
-            </p>
-
-        </div>
-
-        <div>
-
-            <h3>Services</h3>
-
-            <ul>
-                <li>Hospital Systems</li>
-                <li>LMS Development</li>
-                <li>Portfolio Websites</li>
-                <li>Custom Django</li>
-            </ul>
-
-        </div>
-
-        <div>
-
-            <h3>Technologies</h3>
-
-            <ul>
-                <li>Python</li>
-                <li>Django</li>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
-            </ul>
-
-        </div>
-
-        <div>
-
-            <h3>Quick Links</h3>
-
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-
-        </div>
-
+        <div><h3>DjangoMarket</h3><p>Professional Django and Python development services for clients worldwide.</p></div>
+        <div><h3>Services</h3><ul><li>Hospital Systems</li><li>LMS Development</li><li>Portfolio Websites</li><li>Custom Django</li></ul></div>
+        <div><h3>Technologies</h3><ul><li>Python</li><li>Django</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></div>
+        <div><h3>Quick Links</h3><ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="{% url 'services' %}">Services</a></li>
+           <li><a href="{% url 'portfolio' %}">Portfolio</a></li>
+            <li><a href="{% url 'pricing' %}">Pricing</a></li>
+           <li><a href="{% url 'product_cart' %}">Shop</a></li>
+            <li><a href="#contact">Contact</a></li></ul></div>
     </div>
-
-    <div class="copyright">
-        © 2026 DjangoMarket. All Rights Reserved.
-    </div>
-
+    <div class="copyright">© 2026 DjangoMarket. All Rights Reserved.</div>
 </footer>
 
-
-<!-- ================= JAVASCRIPT ================= -->
-
 <script>
-
-    document
-        .getElementById("projectForm")
-        .addEventListener("submit", function(event) {
-
-            event.preventDefault();
-
-            const name =
-                document.getElementById("name").value;
-
-            alert(
-                "Thank you, " +
-                name +
-                "! Your project request has been received."
-            );
-
-            this.reset();
-
-        });
-
+    document.getElementById("projectForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const name = document.getElementById("name").value;
+        alert("Thank you, " + name + "! Your project request has been received.");
+        this.reset();
+    });
 </script>
 
 </body>

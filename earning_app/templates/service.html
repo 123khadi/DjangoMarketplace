@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="padding:80px 10%; background:#0f172a; color:white; min-height:80vh; text-align:center;">
+  <h1 style="font-size:45px; font-weight:bold;">My Services</h1>
+  <p style="color:#94a3b8; margin-top:10px;">What I Build For Clients</p>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:25px; margin-top:50px;">
+
+    <div style="background:#1e293b; padding:30px; border-radius:15px; text-align:left;">
+      <h2 style="font-size:30px;">🏥</h2>
+      <h3 style="margin-top:15px;">Hospital Management System</h3>
+      <p style="color:#94a3b8; margin-top:10px; font-size:14px;">Complete hospital software with patient, doctor, billing management.</p>
+    </div>
+
+    <div style="background:#1e293b; padding:30px; border-radius:15px; text-align:left;">
+      <h2 style="font-size:30px;">🎓</h2>
+      <h3 style="margin-top:15px;">Learning Management System</h3>
+      <p style="color:#94a3b8; margin-top:10px; font-size:14px;">LMS like Udemy with courses, students, payments.</p>
+    </div>
+
+    <div style="background:#1e293b; padding:30px; border-radius:15px; text-align:left;">
+      <h2 style="font-size:30px;">🛒</h2>
+      <h3 style="margin-top:15px;">Django E-commerce Market</h3>
+      <p style="color:#94a3b8; margin-top:10px; font-size:14px;">Your current project - Product Cart, Pricing, Orders.</p>
+    </div>
+
+  </div>
+
+  <a href="/pricing/" style="display:inline-block; background:#38bdf8; color:#0f172a; padding:12px 30px; border-radius:10px; text-decoration:none; font-weight:bold; margin-top:40px;">See Pricing</a>
+</div>
+{% endblock %}

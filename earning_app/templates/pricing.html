@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="padding:50px; text-align:center; background:#f8fafc; min-height:80vh; color:#111;">
+  <h1>Our Pricing Plans</h1>
+  <p>Choose the best plan for your business</p>
+  <div style="display:flex; justify-content:center; margin-top:40px; gap:20px; flex-wrap:wrap;">
+    {% for p in products %}
+    <div style="background:white; padding:40px; border-radius:20px; width:300px; box-shadow:0 10px 20px rgba(0,0,0,0.1);">
+      <h3>{{ p.name }}</h3>
+      <h2 style="color:#2563eb; margin:15px 0;">${{ p.price }}</h2>
+      <p>{{ p.description }}</p>
+      <a href="{% url 'buy_now' p.id %}" style="display:block; background:#2563eb; color:white; padding:12px; border-radius:10px; text-decoration:none; margin-top:20px;">Buy now</a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="padding:80px 10%; background:#020617; color:white; min-height:80vh; text-align:center;">
+  <h1 style="font-size:45px; font-weight:bold;">My Portfolio</h1>
+  <p style="color:#94a3b8; margin-top:10px;">Real Projects I Delivered</p>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:25px; margin-top:50px;">
+
+    <div style="background:#1e293b; border-radius:15px; overflow:hidden; text-align:left;">
+      <div style="height:160px; background:linear-gradient(45deg, #22c55e, #16a34a); display:flex; align-items:center; justify-content:center; font-size:50px;">🏥</div>
+      <div style="padding:20px;">
+        <h3>Hospital SaaS - $2500</h3>
+        <p style="color:#94a3b8; font-size:14px; margin-top:8px;">Client: USA - 6 months running</p>
+        <span style="display:inline-block; margin-top:15px; background:#22c55e20; color:#22c55e; padding:5px 12px; border-radius:20px; font-size:12px;">✅ Delivered</span>
+      </div>
+    </div>
+
+    <div style="background:#1e293b; border-radius:15px; overflow:hidden; text-align:left;">
+      <div style="height:160px; background:linear-gradient(45deg, #38bdf8, #2563eb); display:flex; align-items:center; justify-content:center; font-size:50px;">🎓</div>
+      <div style="padding:20px;">
+        <h3>LMS System - $1800</h3>
+        <p style="color:#94a3b8; font-size:14px; margin-top:8px;">Client: UK - 1200+ Students</p>
+        <span style="display:inline-block; margin-top:15px; background:#38bdf820; color:#38bdf8; padding:5px 12px; border-radius:20px; font-size:12px;">✅ Delivered</span>
+      </div>
+    </div>
+
+    <div style="background:#1e293b; border-radius:15px; overflow:hidden; text-align:left;">
+      <div style="height:160px; background:linear-gradient(45deg, #f59e0b, #ef4444); display:flex; align-items:center; justify-content:center; font-size:50px;">🛒</div>
+      <div style="padding:20px;">
+        <h3>DjangoMarket - $5000</h3>
+        <p style="color:#94a3b8; font-size:14px; margin-top:8px;">Your current project - For Sale</p>
+        <span style="display:inline-block; margin-top:15px; background:#f59e0b20; color:#f59e0b; padding:5px 12px; border-radius:20px; font-size:12px;">🔥 On Sale</span>
+      </div>
+    </div>
+  </div>
+  <a href="/product-cart/" style="display:inline-block; background:white; color:black; padding:12px 30px; border-radius:10px; text-decoration:none; font-weight:bold; margin-top:40px;">Buy This Template</a>
+</div>
+{% endblock %}
